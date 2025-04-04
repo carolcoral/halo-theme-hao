@@ -72,16 +72,6 @@ spec:
                   value: true
                 - label: 隐藏
                   value: false
-            - $formkit: select
-              name: enable_ali_iconfont_symbol_header
-              label: 阿里巴巴IconFont Symbol
-              value: false
-              help: '开启后，可以使用阿里IconFont的Symbol彩色图标。语法为 #icon-xxx，例如 #icon-shouye'
-              options:
-                - value: true
-                  label: 开启
-                - value: false
-                  label: 关闭
         - $formkit: menuRadio
           name: leftMenu
           if: $get(pc_leftMenu).value
@@ -157,8 +147,7 @@ spec:
           help: 开启后会在页面的最上方新增一个第一屏
           value:
             enable_above: false
-            typed:
-            enable_typed_random:
+            random_sentence:
             enable_above_video:
             index_img:
             phone_index_img:
@@ -173,29 +162,69 @@ spec:
                   value: true
                 - label: 隐藏
                   value: false
-            - $formkit: repeater
-              name: typed
+            - $formkit: group
               if: $get(enable_above).value
-              label: 打字机显示的文字
-              value: [ ]
-              children:
-                - $formkit: text
-                  name: text
-                  label: 自定义文字
-                  placeholder: 请输入自定义文字
-            - $formkit: radio
+              name: random_sentence
               label: 随机文字
-              if: $get(enable_above).value
-              name: enable_typed_random
-              key: enable_typed_random
-              id: enable_typed_random
-              value: false
               help: 如果配置了自定义文字，优先展示自定义文字
-              options:
-                - label: 启用
-                  value: true
-                - label: 禁用
+              value:
+                typed:
+                enable_typed_random:
+                random_sentence_type:
+              children:
+                - $formkit: repeater
+                  name: typed
+                  label: 打字机显示的文字
+                  value: [ ]
+                  children:
+                    - $formkit: text
+                      name: text
+                      label: 自定义文字
+                      placeholder: 请输入自定义文字
+                - $formkit: radio
+                  label: 随机文字
+                  name: enable_typed_random
+                  key: enable_typed_random
+                  id: enable_typed_random
                   value: false
+                  options:
+                    - label: 启用
+                      value: true
+                    - label: 禁用
+                      value: false
+                - $formkit: select
+                  name: random_sentence_type
+                  label: 随机文字类型
+                  id: random_sentence_type
+                  key: random_sentence_type
+                  value: ""
+                  options:
+                    - label: 全部
+                      value: ""
+                    - label: 动画
+                      value: a
+                    - label: 漫画
+                      value: b
+                    - label: 游戏
+                      value: c
+                    - label: 文学
+                      value: d
+                    - label: 原创
+                      value: e
+                    - label: 来自网络
+                      value: f
+                    - label: 其他
+                      value: g
+                    - label: 影视
+                      value: h
+                    - label: 诗词
+                      value: i
+                    - label: 网易云
+                      value: j
+                    - label: 哲学
+                      value: k
+                    - label: 抖机灵
+                      value: l
             - $formkit: radio
               if: $get(enable_above).value
               label: 背景模式
@@ -390,7 +419,7 @@ spec:
               name: categoryGroup
               id: categoryGroup
               key: categoryGroup
-              min: 0
+              min: 2
               max: 2
               children:
                 - $formkit: text
