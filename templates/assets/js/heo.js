@@ -39,7 +39,6 @@ var heo = {
         }
     },
 
-
     // 只在首页显示
     onlyHome: function () {
         var urlinfo = window.location.pathname;
@@ -60,7 +59,6 @@ var heo = {
             return false;
         }
     },
-
 
     //监测是否在页面开头
     addNavBackgroundInit: function() {
@@ -195,7 +193,6 @@ var heo = {
                 document.getElementById("author-info__sayhi").innerHTML = getTimeState();
             }
         }
-
     },
 
     // 二维码
@@ -411,14 +408,12 @@ var heo = {
         return t[0]
     },
 
-
     // 显示打赏中控台
     rewardShowConsole: function () {
         $('.console-card-group-reward').attr('style', 'display: flex');
         $('.console-card-group').attr('style', 'display: none');
         document.querySelector("#console").classList.add("show");
         heo.initConsoleState()
-
     },
 
     //显示中控台
@@ -426,8 +421,6 @@ var heo = {
         $('.console-card-group-reward').attr('style', 'display: none');
         $('.console-card-group').attr('style', 'display: flex');
         document.querySelector("#console").classList.add("show");
-
-
     },
 
     //隐藏中控台
@@ -439,6 +432,7 @@ var heo = {
     keyboardToggle: function () {
         if (heo_keyboard) {
             heo_keyboard = false;
+            document.query```javascript
             document.querySelector("#consoleKeyboard").classList.remove("on");
             localStorage.setItem('keyboardToggle', 'false');
         } else {
@@ -477,6 +471,7 @@ var heo = {
         $htmlDom.toggle('hide-aside')
         $htmlDom.contains("hide-aside") ? document.querySelector("#consoleHideAside").classList.add("on") : document.querySelector("#consoleHideAside").classList.remove("on")
     },
+
     toPage: function() {
         var e = document.querySelectorAll(".page-number")
             , t = parseInt(e[e.length - 1].innerHTML)
@@ -499,9 +494,9 @@ var heo = {
             }
             //首页有第一屏就跳转指定位置
             scrollToPost();
-
         }
     },
+
     changeSayHelloText: function() {
         const greetings = GLOBAL_CONFIG.helloText.length == 0 ? ["🤖️ 数码科技爱好者", "🔍 分享与热心帮助", "🏠 智能家居小能手", "🔨 设计开发一条龙", "🤝 专修交互与设计", "🏃 脚踏实地行动派", "🧱 团队小组发动机", "💢 壮汉人狠话不多"] : GLOBAL_CONFIG.helloText
             , authorInfoSayHiElement = document.getElementById("author-info__sayhi");
@@ -603,6 +598,7 @@ var heo = {
                     desc.innerText = power.descr
             } catch (e) {}
     },
+
     getRandomInt: function(e, t) {
         return Math.floor(Math.random() * (t - e)) + e
     },
@@ -611,7 +607,6 @@ var heo = {
     initConsoleState: function() {
         document.documentElement.classList.contains("hide-aside") ? document.querySelector("#consoleHideAside").classList.add("on") : document.querySelector("#consoleHideAside").classList.remove("on")
     },
-
 
     // 音乐节目切换背景
     changeMusicBg: function (isChangeBg = true) {
@@ -648,6 +643,7 @@ var heo = {
             }, 100);
         }
     },
+
     addEventListenerChangeMusicBg: function () {
         const anMusicPage = document.getElementById("anMusic-page");
         const aplayerIconMenu = anMusicPage.querySelector(".aplayer-info .aplayer-time .aplayer-icon-menu");
@@ -667,18 +663,43 @@ var heo = {
         })
     },
 
+    // 初始化博客
+    initBlog: function() {
+        // 调用核心初始化方法
+        heo.darkModeStatus(); // 检测显示模式
+        heo.initIndexEssay(); // 初始化首页短文
+        heo.onlyHome(); // 仅首页显示元素
+        heo.is_Post(); // 检查是否为文章页
+        heo.addNavBackgroundInit(); // 导航栏背景
+        heo.tagPageActive(); // 标签页高亮
+        heo.categoriesBarActive(); // 分类栏高亮
+        heo.addFriendLinksInFooter(); // 页脚友链
+        heo.stopImgRightDrag(); // 禁止图片右键拖动
+        heo.topPostScroll(); // 置顶文章滚动
+        heo.topCategoriesBarScroll(); // 分类栏滚动
+        heo.sayhi(); // 作者卡片问候
+        heo.qrcodeCreate(); // 生成二维码
+        heo.reflashEssayWaterFall(); // 刷新短文瀑布流
+        heo.initThemeColor(); // 初始化主题色
+        heo.hidecookie(); // 隐藏cookie窗口
+        heo.hideTodayCard(); // 隐藏今日推荐
+        heo.changeSayHelloText(); // 更改问候语
+        heo.addPowerLinksInPostRightSide(); // 文章右侧赞助链接
+        heo.initConsoleState(); // 初始化控制台状态
+        heo.changeMusicBg(false); // 初始化音乐背景
+    }
 };
+
 const adjectives = ["美丽的", "英俊的", "聪明的", "勇敢的", "可爱的", "慷慨的", "善良的", "可靠的", "开朗的", "成熟的", "稳重的", "真诚的", "幽默的", "豁达的", "有趣的", "活泼的", "优雅的", "敏捷的", "温柔的", "温暖的", "敬业的", "细心的", "耐心的", "深沉的", "朴素的", "含蓄的", "率直的", "开放的", "务实的", "坚强的", "自信的", "谦虚的", "文静的", "深刻的", "纯真的", "朝气蓬勃的", "慎重的", "大方的", "顽强的", "迷人的", "机智的", "善解人意的", "富有想象力的", "有魅力的", "独立的", "好奇的", "干净的", "宽容的", "尊重他人的", "体贴的", "守信的", "有耐性的", "有责任心的", "有担当的", "有远见的", "有智慧的", "有眼光的", "有冒险精神的", "有爱心的", "有同情心的", "喜欢思考的", "喜欢学习的", "具有批判性思维的", "善于表达的", "善于沟通的", "善于合作的", "善于领导的", "有激情的", "有幽默感的", "有思想的", "有个性的", "有正义感的", "有责任感的", "有创造力的", "有想象力的", "有艺术细胞的", "有团队精神的", "有协调能力的", "有决策能力的", "有组织能力的", "有学习能力的", "有执行能力的", "有分析能力的", "有逻辑思维的", "有创新能力的", "有专业素养的", "有商业头脑的"]
     , vegetablesAndFruits = ["萝卜", "白菜", "芹菜", "生菜", "青椒", "辣椒", "茄子", "豆角", "黄瓜", "西红柿", "洋葱", "大蒜", "土豆", "南瓜", "豆腐", "韭菜", "花菜", "西兰花", "蘑菇", "金针菇", "苹果", "香蕉", "橙子", "柠檬", "猕猴桃", "草莓", "葡萄", "桃子", "杏子", "李子", "石榴", "西瓜", "哈密瓜", "蜜瓜", "樱桃", "蓝莓", "柿子", "橄榄", "柚子", "火龙果"];
+
 $(document).ready((function() {
-        initBlog()
-    }
-)),
+    heo.initBlog();
+}));
 document.addEventListener("pjax:complete", (function() {
-        initBlog();
-        // 解决 katex pjax问题
-        if((GLOBAL_CONFIG.htmlType == 'post' || GLOBAL_CONFIG.htmlType == 'page') && typeof window.renderKaTex != 'undefined'){
-            window.renderKaTex();
-        }
-     }
-));
+    heo.initBlog();
+    // 解决 katex pjax问题
+    if((GLOBAL_CONFIG.htmlType == 'post' || GLOBAL_CONFIG.htmlType == 'page') && typeof window.renderKaTex != 'undefined'){
+        window.renderKaTex();
+    }
+}));
